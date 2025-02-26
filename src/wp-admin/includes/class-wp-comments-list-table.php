@@ -359,6 +359,10 @@ class WP_Comments_List_Table extends WP_List_Table {
 
 		$actions = array();
 
+		if ( ! current_user_can( 'moderate_comments' ) ) {
+			return $actions; // Return the empty actions array if the user doesn't have permission
+		}
+
 		if ( in_array( $comment_status, array( 'all', 'approved' ), true ) ) {
 			$actions['unapprove'] = __( 'Unapprove' );
 		}
